@@ -11,9 +11,15 @@ let hintMessages = document.querySelector('.high-low-hints');
 console.log(hintMessages);
 let resultsSpan = document.querySelector('.results');
 console.log(resultsSpan);
+const gameBox = document.querySelector('.game-box');
+console.log(gameBox);
+const gameOver = document.querySelector('.game-over-message');
+console.log(gameOver);
+const youWin = document.querySelector('.you-win-message');
+console.log(youWin);
 
 let randomNumber = Math.ceil(Math.random() * 20);
-numberOfTries = 4;
+numberOfTries = 3;
 
 // initialize state - 
 // button onclick do this check check users guess against random num using function
@@ -31,21 +37,28 @@ button.addEventListener('click', () => {
         console.log('Too high');
         hintMessages.textContent = ('Yikes! Too high!');
         resultsSpan.textContent = ('BTW You have ' + numberOfTries + ' more tries left.'); 
+        // checking game over
+        if (numberOfTries <= 0) {
+            gameBox.classList.add('hidden');
+            gameOver.classList.remove('hidden');
+        }
+
     } else if (numsComparisonResults === -1) {
         console.log('Too low');
         numberOfTries--;
-        hintMessages.textContent = ('Yikes! Too high!');
+        hintMessages.textContent = ('Yikes! Too low!');
         resultsSpan.textContent = ('BTW You have ' + numberOfTries + ' more tries left.');  
+        // checking game over
+        if (numberOfTries <= 0) {
+            gameBox.classList.add('hidden');
+            gameOver.classList.remove('hidden');
+        }
+
     } else if (numsComparisonResults === 0) {
-        hintMessages.textContent = ('WHOOOOOOTTT');
-        resultsSpan.textContent = ('You guessed it!');
-        console.log('You guessed it!');
+        // Display win message
+        gameBox.classList.add('hidden');
+        youWin.classList.remove('hidden');
     }
-    // if userNum is too high, in resultsSpan write "guess is too high"
-        // update numberOfTries by decreasing number by 1
-
-    // if number of tries is less than one, in resultsSpan write "you lose! "
-
 });
 
 // set event listeners to update state and DOM
