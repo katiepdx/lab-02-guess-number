@@ -64,5 +64,5 @@ footer {
 }
 
 .hidden {
-    visibility: hidden;
+    display: none;
 }
