@@ -1,4 +1,4 @@
-// import { compareNumbers } from ('./numberGameUtils');
+import { compareNumbers } from './numberGameUtils.js';
 
 // import functions and grab DOM elements
 let userGuess = document.querySelector('.user-guess');
@@ -7,6 +7,8 @@ const button = document.querySelector('.button');
 console.log(button);
 let numberOfTries = document.querySelector('.number-of-tries');
 console.log(numberOfTries);
+let hintMessages = document.querySelector('.high-low-hints');
+console.log(hintMessages);
 let resultsSpan = document.querySelector('.results');
 console.log(resultsSpan);
 
@@ -18,10 +20,27 @@ numberOfTries = 4;
 button.addEventListener('click', () => {
     // get the value of input field 
     let userNum = Number(userGuess.value);
-    console.log(userNum);
-    console.log(randomNumber); 
+    // console.log(userNum);
+    console.log(randomNumber);
+
+    let numsComparisonResults = compareNumbers(userNum, randomNumber);
 
     //compare that number using the compareNumbers function
+    if (numsComparisonResults === 1) {
+        numberOfTries--;
+        console.log('Too high');
+        hintMessages.textContent = ('Yikes! Too high!');
+        resultsSpan.textContent = ('BTW You have ' + numberOfTries + ' more tries left.'); 
+    } else if (numsComparisonResults === -1) {
+        console.log('Too low');
+        numberOfTries--;
+        hintMessages.textContent = ('Yikes! Too high!');
+        resultsSpan.textContent = ('BTW You have ' + numberOfTries + ' more tries left.');  
+    } else if (numsComparisonResults === 0) {
+        hintMessages.textContent = ('WHOOOOOOTTT');
+        resultsSpan.textContent = ('You guessed it!');
+        console.log('You guessed it!');
+    }
     // if userNum is too high, in resultsSpan write "guess is too high"
         // update numberOfTries by decreasing number by 1
 
